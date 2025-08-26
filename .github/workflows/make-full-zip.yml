@@ -1,16 +1,20 @@
 name: Make Full Zip
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:   # 👈 Ye manual run ke liye hai
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Create zip
+      - name: Install zip
+        run: sudo apt-get install zip
+
+      - name: Create zip of repo
         run: zip -r ocean-crm-full.zip . -x "*.git*"
 
       - name: Upload artifact
